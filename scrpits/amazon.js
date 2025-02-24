@@ -1,3 +1,5 @@
+import { cart, addCart } from "../data/cart.js";
+
 let productHTML = '';
 
 products.forEach((product) => {
@@ -54,24 +56,6 @@ products.forEach((product) => {
 });
 
 document.querySelector('.products-grid').innerHTML = productHTML;
-
-function addCart(productId) {
-  let matchingitem;
-    cart.forEach((item) => {
-      if(productId === item.productId){
-        matchingitem = item;
-      }
-    });
-    if(matchingitem){
-      matchingitem.quantity += 1;
-    } else {
-      cart.push({
-        productId:productId,
-        quantity:1
-      });
-      console.log(cart);
-    }
-}
 
 function updateCart() {
   let cartQuantity = 0;
