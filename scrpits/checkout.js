@@ -92,6 +92,7 @@ cart.forEach((cartitem) => {
     `;
 });
 
+
 document.querySelector('.order-summary').innerHTML = cartHTML;
 
 document.querySelectorAll('.delete-quantity-link').forEach((link) => {
