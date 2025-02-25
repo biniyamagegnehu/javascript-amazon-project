@@ -1,4 +1,4 @@
-import { cart } from '../data/cart.js';
+import { cart, removeFromCart } from '../data/cart.js';
 import {products} from '../data/products.js'
 
 let cartHTML = '';
@@ -12,8 +12,6 @@ cart.forEach((cartitem) => {
             matchingProduct = product;
         }
     });
-
-    console.log(matchingProduct);
 
     cartHTML += `
           <div class="cart-item-container">
@@ -30,7 +28,7 @@ cart.forEach((cartitem) => {
                   ${matchingProduct.name}
                 </div>
                 <div class="product-price">
-                  $${matchingProduct.priceCent/100}
+                  $${(matchingProduct.priceCent/100).toFixed(2)}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -39,7 +37,7 @@ cart.forEach((cartitem) => {
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary" data-product-id="${matchingProduct.id}">
                     Delete
                   </span>
                 </div>
@@ -95,3 +93,11 @@ cart.forEach((cartitem) => {
 });
 
 document.querySelector('.order-summary').innerHTML = cartHTML;
+
+document.querySelectorAll('.delete-quantity-link').forEach((link) => {
+  link.addEventListener('click',() => {
+    const productId = link.dataset.productId;
+    removeFromCart(productId);
+    console.log(cart);
+  })
+})
