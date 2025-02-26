@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from '../data/cart.js';
+import { calculateCartQuantity, cart, removeFromCart } from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let cartHTML = '';
@@ -95,15 +95,7 @@ cart.forEach((cartitem) => {
 
 document.querySelector('.order-summary').innerHTML = cartHTML;
 
-function updateCart() {
-  let cartQuantity = 0;
 
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
-    })
-    
-    document.querySelector('.return-to-home-link').innerHTML = cartQuantity;
-}
 
 document.querySelectorAll('.delete-quantity-link').forEach((link) => {
   link.addEventListener('click',() => {
@@ -111,8 +103,8 @@ document.querySelectorAll('.delete-quantity-link').forEach((link) => {
     removeFromCart(productId);
     const container = document.querySelector(`.js-cart-item-container-${productId}`);
     container.remove();
-    updateCart();
+    calculateCartQuantity();
   })
 })
 
-updateCart();
+calculateCartQuantity();
