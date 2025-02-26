@@ -44,6 +44,7 @@ export function calculateCartQuantity() {
   document.querySelector('.cart-quantity').innerHTML = cartQuantity;
 
 }
+
   
 export function removeFromCart(productId) {
   const newCart = [];
@@ -53,5 +54,19 @@ export function removeFromCart(productId) {
     }
   });
   cart = newCart;
+  saveToStorage();
+}
+
+export function updateCartQuantity(productId,newQuantity) {
+  let matchingitem;
+
+  cart.forEach((item) => {
+    if(item.productId === productId){
+      matchingitem = item;
+    }
+  });
+
+  matchingitem.quantity = newQuantity;
+
   saveToStorage();
 }
