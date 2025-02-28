@@ -2,6 +2,7 @@ import { calculateCartQuantity, cart, removeFromCart, updateCartQuantity } from 
 import {products} from '../data/products.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOption} from '../data/DeliveryOption.js';
+import {formatCurrency} from './utils/money.js'
 
 const today = dayjs();
 const deliveryDate = today.add(7,'days');
@@ -52,7 +53,7 @@ cart.forEach((cartitem) => {
                   ${matchingProduct.name}
                 </div>
                 <div class="product-price">
-                  $${(matchingProduct.priceCent/100).toFixed(2)}
+                  $${formatCurrency(matchingProduct.priceCents)}
                 </div>
                 <div class="product-quantity">
                   <span>
